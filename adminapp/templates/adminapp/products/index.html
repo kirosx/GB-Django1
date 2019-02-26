@@ -1,0 +1,12 @@
+{% extends 'adminapp/base.html' %}
+{% block content %}
+<hr>
+<h1>Products List</h1>
+<ul>
+    {% for i in models %}
+    <li>
+        <a href="{% url 'adminapp:products_read' i.id %}">{{i.name}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

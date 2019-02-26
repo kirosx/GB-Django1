@@ -1,0 +1,12 @@
+{% extends 'adminapp/base.html' %}
+{% block content %}
+<hr>
+<h1>Categories</h1>
+<ul>
+    {% for i in category %}
+    <li>
+        <a href="{% url 'adminapp:categories_read' i.id %}">{{i.name}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

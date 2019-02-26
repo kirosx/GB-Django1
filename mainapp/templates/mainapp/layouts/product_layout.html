@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{tittle}}</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="header single">
+            <a class="logo" href="{% url 'home'%}"><img src="{% static 'img/logo.svg' %}" alt="logo"></a>
+           {% include 'mainapp/layouts/allmenu.html' %}
+        </div>
+        <div class="submenu">
+            <ul class="sublist">
+                <li class="menu-link product"><a href="{% url 'products:index'%}" class="menu-link product">All</a></li>
+                <li class="menu-link product"><a href="{% url 'home' %}" class="menu-link product">HOME</a></li>
+                {% block productmenu %}
+
+                {% endblock %}
+            </ul>
+        </div>
+        {% block content %}
+        <div class="productdescription">
+            <div class="prfot"><img src="{% static 'img/chaor.jpg' %}" alt="">
+                <div class="miniphoto"><img src="{% static 'img/mini1.jpg' %}" alt="">
+                    <img src="{% static 'img/mini2.jpg' %}" alt="">
+                    <img src="{% static 'img/mini3.jpg' %}" alt=""></div>
+            </div>
+            <div class="prdescr">
+                <h3 class="name">Fishnet Chair</h3>
+                <h3 class="hotdeal">Hot Deal</h3>
+                <p class="price"><span class="cur">$</span> 36.7 <b class="cent">/sq</b></p>
+                <div class="redorder">Order us <img src="{% static 'img/arrowred.svg' %}" class="redarow" alt=""></div>
+                <p class="descripstuff">The majesty of Mountains - Ugmonk style.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+                    sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab il.</p>
+            </div>
+        </div>
+        {% endblock %}
+        {% block trends %}
+        <div class="trends">
+            <div class="trending-header">
+                <h3 class="trendheader">Related Products</h3><a href="{% url 'products:index' %}" class="exploreall">EXPLORE ALL <img src="{% static 'img/arrow.svg' %}" alt=""></a>
+            </div>
+            <div class="related">
+                {% endblock %}
+                {%block related%}
+                <a href=""><img src="{% static 'img/trend1.jpg' %}" alt="" class="related_links"></a>
+                <a href=""> <img src="{% static 'img/trend2.jpg' %}" class="related_links" alt=""></a>
+                <a href=""> <img src="{% static 'img/trend3.jpg' %}" class="related_links" alt=""></a>
+                {%endblock%}
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footertext">
+                <div class="footertitle">Contact Us <p class="adress
+                   ">132A Bridge Road Richmond VIC
+                        Australia. <br>
+                        Talk to us on 1300 132 <br>
+                        info@interior.com</p>
+                </div>
+                <div class="footercentertext">
+                    <div class="footertitle">USEFUL INFORMAtion</div>
+                    <div class="footlsts">
+                        <ul class="ftlists">
+                            <li class="lifoot"><a href="" class="lifoot">Sales terms</a></li>
+                            <li class="lifoot"><a href="" class="lifoot">Customer care</a></li>
+                            <li class="lifoot"><a href="" class="lifoot">Delivery</a></li>
+                        </ul>
+                        <ul class="ftlists">
+                            <li class="lifoot"><a href="" class="lifoot">Architect accounts</a></li>
+                            <li class="lifoot"><a href="" class="lifoot">Careers</a></li>
+                            <li class="lifoot"><a href="" class="lifoot">Exchanges &amp; returns</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footertoch">
+                    <div class="footertitle">Let’s Stay in Touch!</div>
+                    <p class="adress">Suscribe to know about our latest news, products and special offers just for suscribers.</p>
+                    <div class="email"><input type="email" class="mailfield" placeholder="your email adress"></div>
+
+                </div>
+            </div>
+            <div class="bottomfooter">
+                <div class="copyright">&copy; Copyright - INTERIOR 2016. All Rights Reserved.</div>
+                <div><a href=""><img src="{% static 'img/social-links.jpg' %}" alt=""></a></div>
+                <div class="copyright">Terms &amp; Conditions / Privacy policy &amp; Cookies</div>
+            </div>
+        </div>
+
+    </div>
+    {% block js %}
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/myjs.js' %}"></script>
+    {% endblock%}
+</body></html>

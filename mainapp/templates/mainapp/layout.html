@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="contactus">
+            <div class="header">
+                <a class="logo" href="index.html"><img src="{% static 'img/logo.svg' %}" alt="logo"></a>
+                <ul class="menu">
+                    {% block mainmenu %}
+                    <li class="menu-list"><a href="/" class="menu-link menu-link">HOME</a></li>
+                    <li class="menu-list"><a href="/products" class="menu-link">PRODUCTS</a></li>
+                    <li class="menu-list"><a href="#" class="menu-link">HISTORY</a></li>
+                    <li class="menu-list"><a href="/product" class="menu-link">SHOWROOM</a></li>
+                    <li class="menu-list"><a href="#" class="menu-link menu-link-active">CONTACT</a></li>
+                    <li class="menu-list search"><img src="{% static 'img/search.svg' %}" alt="search"></li>
+                    {% endblock %}
+                </ul>
+            </div>
+            <p class="cont">Contact Us</p>
+
+        </div>
+        <div class="maps">
+            <div class="full_adress"><a href=""><img src="{% static 'img/map.jpg' %}" alt=""></a>
+                <h2 class="citytitle">California</h2>
+                <h3 class="Phontitle">Phone</h3>
+                <p class="phone">1900-1234-5678</p>
+                <h3 class="Phontitle">Email</h3>
+                <p class="phone">info@interrior.comp</p>
+                <h3 class="Phontitle">
+                    Adress</h3>
+                <p class="adresstext">12 W 1st St, 90001 Los Angeles.California</p>
+            </div>
+            <div class="full_adress"><a href=""><img src="{% static 'img/map.jpg' %}" alt=""></a>
+                <h2 class="citytitle">California</h2>
+                <h3 class="Phontitle">Phone</h3>
+                <p class="phone">1900-1234-5678</p>
+                <h3 class="Phontitle">Email</h3>
+                <p class="phone">info@interrior.comp</p>
+                <h3 class="Phontitle">
+                    Adress</h3>
+                <p class="adresstext">12 W 1st St, 90001 Los Angeles.California</p>
+            </div>
+            <div class="full_adress"><a href=""><img src="{% static 'img/map.jpg' %}" alt=""></a>
+                <h2 class="citytitle">California</h2>
+                <h3 class="Phontitle">Phone</h3>
+                <p class="phone">1900-1234-5678</p>
+                <h3 class="Phontitle">Email</h3>
+                <p class="phone">info@interrior.comp</p>
+                <h3 class="Phontitle">
+                    Adress</h3>
+                <p class="adresstext">12 W 1st St, 90001 Los Angeles.California</p>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footertext">
+                <div class="footertitle">Contact Us <p class="adress
+                   ">132A Bridge Road Richmond VIC
+                        Australia. <br>
+                        Talk to us on 1300 132 <br>
+                        info@interior.com</p>
+                </div>
+                <div class="footercentertext">
+                    <div class="footertitle">USEFUL INFORMAtion</div>
+                    <div class="footlsts">
+                        <ul class="ftlists">
+                            <li class="lifoot"><a href="" class="lifoot">Sales terms</a></li>
+                            <li class="lifoot"><a href="" class="lifoot">Customer care</a></li>
+                            <li class="lifoot"><a href="" class="lifoot">Delivery</a></li>
+                        </ul>
+                        <ul class="ftlists">
+                            <li class="lifoot"><a href="" class="lifoot">Architect accounts</a></li>
+                            <li class="lifoot"><a href="" class="lifoot">Careers</a></li>
+                            <li class="lifoot"><a href="" class="lifoot">Exchanges &amp; returns</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footertoch">
+                    <div class="footertitle">Let’s Stay in Touch!</div>
+                    <p class="adress">Suscribe to know about our latest news, products and special offers just for suscribers.</p>
+                    <div class="email"><input type="email" class="mailfield" placeholder="your email adress"></div>
+
+                </div>
+            </div>
+            <div class="bottomfooter">
+                <div class="copyright">&copy; Copyright - INTERIOR 2016. All Rights Reserved.</div>
+                <div><a href=""><img src="{% static 'img/social-links.jpg' %}" alt=""></a></div>
+                <div class="copyright">Terms &amp; Conditions / Privacy policy &amp; Cookies</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

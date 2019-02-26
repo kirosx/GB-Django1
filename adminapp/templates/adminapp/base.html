@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{tittle}}</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header single">
+            <a class="logo" href="{% url 'home'%}"><img src="{% static 'img/logo.svg' %}" alt="logo"></a>
+           {% include 'adminapp/menu.html' %}
+        </div>
+        <div class="submenu">
+            <ul class="sublist">
+                <li class="menu-link product"><a href="{% url 'home' %}" class="menu-link product">HOME</a></li>
+                <li class="menu-link product"><a href="{% url 'adminapp:users' %}" class="menu-link product">Users</a></li>
+                <li class="menu-link product"><a href="{% url 'adminapp:categories' %}" class="menu-link product">Categories</a></li>
+                <li class="menu-link product"><a href="{% url 'adminapp:products' %}" class="menu-link product">Stuff</a></li>
+                {% block productmenu %}
+
+                {% endblock %}
+            </ul>
+        </div>
+        {% block content %}
+         {% endblock %}
+        </div>
+
+    </div>

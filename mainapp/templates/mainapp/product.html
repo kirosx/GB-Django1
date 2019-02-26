@@ -1,0 +1,36 @@
+{% extends 'mainapp/layouts/product_layout.html' %}
+{% load static %}
+{% load tags %}
+{% block productmenu %}
+{% for i in men %}
+<li class="menu-link product"><a href="/product/cat{{i.id}}" class="menu-link product">{{i.name}}</a></li>
+{% endfor %}
+{% endblock %}
+{% block content %}
+<div class="productdescription">
+            <div class="prfot"><img src="{{MEDIA_URL}}{{product.img}}" class="mainproduct" alt="">
+                <div class="miniphoto">
+                    <img class="miniphotoimg" src="{{MEDIA_URL}}{{product.img}}" alt="">
+                    <img class="miniphotoimg" src="{{MEDIA_URL}}{{product.img}}" alt="">
+                    <img class="miniphotoimg" src="{{MEDIA_URL}}{{product.img}}" alt="">
+                   </div>
+            </div>
+            <div class="prdescr">
+                <h3 class="name">{{product.name}}</h3>
+                <h3 class="hotdeal">Hot Deal</h3>
+                <p class="price"><span class="cur">$</span> {{product.price}} <b class="cent">/sq</b></p>
+                <p class="price">p{{product.price | rubles}}<b class="cent">/sq</b></p>
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'basket:add' id=product.id%}"><div class="redorder">Order us <img src="{% static 'img/arrowred.svg' %}" class="redarow" alt=""></div></a>
+                {% else %}
+                <a href="{% url 'auth:login'%}"><div class="redorder">Login<img src="{% static 'img/arrowred.svg' %}" class="redarow" alt=""></div></a>
+                {% endif %}
+                <p class="descripstuff">{{product.description}}</p>
+            </div>
+        </div>
+{% endblock %}
+ {% block related %}
+                {% for i in same %}
+                <a href="{%url 'product:index' %}{{i.id}}"><img src="/media/{{i.img}}" alt="" class="related_links"></a>
+                {% endfor %}
+ {% endblock %}

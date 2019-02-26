@@ -1,0 +1,30 @@
+{% extends 'mainapp/layouts/product_layout.html' %}
+{% load static %}
+{% block content %}
+{% load tags %}
+{% if products %}
+<ul>
+    {% for item in products %}
+    <li>
+        <p>{{item.product.name}}</p>
+        <img src="{{MEDIA_URL}}{{item.product.img}}" alt="">
+        <b>Price {{item.product.price}} total - {{item.product_price}}</b>
+        <b>Qty <span class="basketquantity">{{item.quantity}}</span></b><button class="addstuff" data-id="{{item.product_id}}">Add</button>
+        <button class="delstuff" data-id="{{item.product_id}}">Remove</button>
+        <a href="{% url 'basket:remove' id=item.product_id%}">Delete</a>
+    </li>
+    {%endfor%}
+{{total}}
+    <hr>
+    {{total | rubles}}
+</ul>
+{% else %}
+No stuff in basket
+{% endif %}
+{% endblock %}
+{%block trends%}
+
+{%endblock%}
+{% block related %}
+
+{%endblock%}

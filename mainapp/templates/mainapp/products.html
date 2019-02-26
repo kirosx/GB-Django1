@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="contactus">
+            <div class="header">
+                <a class="logo" href="{% url 'home'%}"><img src="{% static 'img/logo.svg' %}" alt="logo"></a>
+                {% include 'mainapp/layouts/allmenu.html' %}
+            </div>
+            <p class="cont">Our Products Range</p>
+        </div>
+        <div class="productsall">
+            <ul class="menu">
+                <li class="menu-list"><a href="#" class="menu-link menu-link-active produc f">ALL</a></li>
+                <li class="menu-list"><a href="{% url 'home' %}" class="menu-link product">HOME</a></li>
+                {% for i in men %}
+<li class="menu-list"><a href="/product/cat{{i.id}}" class="menu-link product">{{i.name}}</a></li>
+{% endfor %}
+                {% if provider.has_previous %}
+                <li class="menu-list"><a href="{% url 'products:page' page=provider.previous_page_number %}" class="menu-link product"><</a></li>
+                {% endif %}
+                <li class="menu-list"><a href="#" class="menu-link product">{{provider.number}}/{{provider.paginator.num_pages}}</a></li>
+                {% if provider.has_next %}
+                <li class="menu-list"><a href="{% url 'products:page' page=provider.next_page_number %}" class="menu-link product">></a></li>
+                {% endif %}
+            </ul>
+            <div class="product_photo">
+                {% for i in provider %}
+                <a href="{% url 'product:index'%}{{i.id}}"><img src="{{MEDIA_URL}}{{i.img}}" alt="" class="allproducts"></a>
+                {% endfor %}
+            </div>
+            <div class="reload"><a href="#"><img src="{% static 'img/reload.jpg' %}" alt="" class="rl"></a></div>
+        </div>
+        <div class="xclblock">
+            <div class="xcl1">
+                <div class="xcl1text">
+                    <h4 class="excluseve">EXCLUSIVE</h4>
+                    <h2 class="fishnet_chair">Fishnet Chair</h2>
+                    <p class="exclusive_dscr">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt</p>
+                    <a class="btnxcl" href="#">Order Us <img src="{% static 'img/arrow.svg' %}" alt=""></a>
+                </div>
+            </div>
+            <div class="xcl2">
+                <div class="xcl1text">
+                    <h4 class="excluseve">EXCLUSIVE</h4>
+                    <h2 class="fishnet_chair">Fishnet Chair</h2>
+                    <p class="exclusive_dscr">Seat and back with upholstery made of cold cure foam. Steel frame, available in matt</p>
+                    <a class="btnxcl" href="#">Order Us <img src="{% static 'img/arrow.svg' %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footertext">
+                <div class="footertitle">Contact Us <p class="adress
+                   ">132A Bridge Road Richmond VIC
+                        Australia. <br>
+                        Talk to us on 1300 132 <br>
+                        info@interior.com</p>
+                </div>
+                <div class="footercentertext">
+                    <div class="footertitle">USEFUL INFORMAtion</div>
+                    <div class="footlsts">
+                        <ul class="ftlists">
+                            <li class="lifoot"><a href="" class="lifoot">Sales terms</a></li>
+                            <li class="lifoot"><a href="" class="lifoot">Customer care</a></li>
+                            <li class="lifoot"><a href="" class="lifoot">Delivery</a></li>
+                        </ul>
+                        <ul class="ftlists">
+                            <li class="lifoot"><a href="" class="lifoot">Architect accounts</a></li>
+                            <li class="lifoot"><a href="" class="lifoot">Careers</a></li>
+                            <li class="lifoot"><a href="" class="lifoot">Exchanges &amp; returns</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footertoch">
+                    <div class="footertitle">Let’s Stay in Touch!</div>
+                    <p class="adress">Suscribe to know about our latest news, products and special offers just for suscribers.</p>
+                    <div class="email"><input type="email" class="mailfield" placeholder="your email adress"></div>
+
+                </div>
+            </div>
+            <div class="bottomfooter">
+                <div class="copyright">&copy; Copyright - INTERIOR 2016. All Rights Reserved.</div>
+                <div><a href=""><img src="{% static 'img/social-links.jpg' %}" alt=""></a></div>
+                <div class="copyright">Terms &amp; Conditions / Privacy policy &amp; Cookies</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

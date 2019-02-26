@@ -1,0 +1,40 @@
+{% load static %}
+<ul class="menu">
+     {% for link in links %}
+<li class="menu-list">
+<a href="{% url link.href %}"
+class="menu-link{% if request.resolver_match.url_name == link.href %}
+menu-link-active
+{% endif %}">
+{{ link.name }}
+</a>
+</li>
+{% endfor %}
+
+
+    {% if user.is_authenticated %}
+    <li class="menu-list">
+        <a href="{% url 'auth:logout' %}" class="menu-link">
+            Logout
+        </a>
+    </li>
+    <li class="menu-list">
+        <a href="{% url 'auth:edit' %}" class="menu-link">
+            Edit ({{user.username}})
+        </a>
+    </li>
+    <li class="menu-list"><a href="{%url 'basket:index'%}" class="menu-link"><i class="fas fa-shopping-bag"></i>{{basket.0.total_qty}}</li></a>
+        {% if user.is_superuser %}
+    <li class="menu-list">
+        <a href="{% url 'adminapp:products' %}" class="menu-link">
+            ADMIN
+        </a>
+    </li>
+        {% endif %}
+    {% else %}
+    <li class="menu-list"><a href="{% url 'auth:login' %}" class="menu-link">
+        Login
+    </a></li>
+    {% endif %}
+    <li class="menu-list search"><img src="{% static 'img/search.svg' %}" alt="search"></li>
+                </ul>

@@ -1,0 +1,17 @@
+{% extends 'adminapp/base.html' %}
+{% block content %}
+<hr>
+<h1>{{title.name}}</h1>
+<h2>(<a href="{% url 'adminapp:categories_update' title.id%}">edit</a>)</h2>
+<h2>(<a href="{% url 'adminapp:categories_delete' title.id%}">DELETE</a>)</h2>
+<hr>
+<h1>edit category</h1>
+
+<form action="{% url 'adminapp:categories_update' title.id %}" method="post">
+    {% csrf_token %}
+    {{update_form.as_p}}
+    <p>
+        <input type="submit" value="Update">
+    </p>
+</form>
+{% endblock %}

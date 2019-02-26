@@ -1,0 +1,12 @@
+{% extends 'adminapp/base.html' %}
+{% block content %}
+<hr>
+<h1>{{stuff.name}}</h1>
+<h2><a href="{% url 'adminapp:categories_read' stuff.category.id %}">({{stuff.category.name}})</a></h2>
+<h2>price: {{stuff.price}}</h2>
+<p>Description : <br> {{stuff.description}}</p>
+<img src="{{MEDIA_URL}}{{stuff.img}}" alt="">
+<a href="{% url 'adminapp:products_update' stuff.id %}">EDIT</a>
+<a href="{% url 'adminapp:products_delete' stuff.id %}">DELETE</a>
+
+{% endblock %}
