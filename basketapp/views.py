@@ -17,7 +17,7 @@ def add(request: HttpRequest, id : int):
 
     if request.is_ajax():
         return JsonResponse({
-            'quantity':Basket.objects.get(product__id=id).quantity
+            'quantity':Basket.objects.get(product__id=id).quantity,
         })
 
 
@@ -29,10 +29,6 @@ def remove(request: HttpRequest, id: int):
     item[0].quantity -= 1
     item[0].save()
 
-    if request.is_ajax():
-        return JsonResponse({
-            'quantity':Basket.objects.get(product__id=id).quantity
-        })
     return HttpResponseRedirect (request.META['HTTP_REFERER'])
 
 def index(request:HttpRequest):

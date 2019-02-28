@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from authapp.models import CustomUser
+import random, hashlib
 
 class LoginForm(AuthenticationForm):
     class Meta:
@@ -16,7 +17,7 @@ class LoginForm(AuthenticationForm):
 class RegisterForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ('username', 'password', 'age', 'first_name')
+        fields = ('username', 'password', 'age', 'first_name','email')
 
     def __init__(self,*args,**kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
@@ -24,6 +25,16 @@ class RegisterForm(UserCreationForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
             field.help_text=''
+
+    def save(self):
+        user = super(RegisterForm, self).save()
+
+        user.is_active = False
+        salt = hashlib.sha1(str(random.random()).encode('utf8')).hexdigest()[:6]
+        user.activation_key = hashlib.sha1((user.email + salt).encode('utf8')).hexdigest()
+        user.save()
+
+        return user
 
 
 class UpdateForm(UserChangeForm):
