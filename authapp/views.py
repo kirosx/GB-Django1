@@ -4,6 +4,10 @@ from django.http import HttpRequest, HttpResponse
 from authapp.forms import LoginForm, RegisterForm, UpdateForm
 from django.contrib import auth
 from django.urls import reverse
+from authapp.models import CustomUser
+from django.core.mail import send_mail
+from geekshop import settings
+
 
 def login(request:HttpRequest):
     title = 'войти'
@@ -33,7 +37,10 @@ def register(request:HttpRequest):
     if request.method == 'POST':
         reg_form = RegisterForm(request.POST)
         if reg_form.is_valid():
-            reg_form.save()
+            user = reg_form.save()
+            if send_verify_mail(user):
+                print('Confirmation sended')
+                return HttpResponseRedirect(reverse('auth:login'))
             return HttpResponseRedirect(reverse('auth:login'))
     else:
         reg_form = RegisterForm()
@@ -58,3 +65,26 @@ def edit(request:HttpRequest):
         'update_form': update_form,
     }
     return render(request, 'authapp/edit.html', content)
+
+
+def verify(request:HttpRequest,email,activation_key):
+    try:
+        user = CustomUser.objects.get(email=email)
+        if user.activation_key == activation_key and not user.is_activation_key_expired():
+            user.is_active == True
+            user.save()
+            auth.login(request,user)
+            return render(request,'authapp/verify.html')
+        else:
+            print(f'ERROR {user}')
+            return render(request, 'authapp/verify.html')
+    except Exception as e:
+        print(f'error {e.args}')
+        return HttpResponseRedirect(reverse('home'))
+
+
+def send_verify_mail(user):
+    verify_link = reverse('auth:verify', args=[user.email, user.activation_key])
+    title = f'Confirmation {user.email}'
+    message = f'For confirmation {user.username} account, please follow \n {settings.DOMAIN_NAME}{verify_link}'
+    return send_mail(title, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)

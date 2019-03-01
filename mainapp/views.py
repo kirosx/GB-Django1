@@ -15,17 +15,10 @@ links_menu = [
 ]
 
 
-def get_basket(user):
-    if user.is_authenticated:
-        items = Basket.objects.filter(user=user)
-        return items
-    else:
-        return None
-
 def index(request):
     intro = Stuff.objects.all ()[:4]
     trending = Stuff.objects.all ()[8:15]
-    return render(request,'mainapp/index.html', {'links': links_menu,'intro':intro, 'trending':trending,'basket': get_basket(request.user)})
+    return render(request,'mainapp/index.html', {'links': links_menu,'intro':intro, 'trending':trending})
 
 def products(request:HttpRequest, page=1):
     category = Category.objects.all()
@@ -37,24 +30,24 @@ def products(request:HttpRequest, page=1):
         product_provider = provider.page(1)
     except EmptyPage:
         product_provider = provider.page(provider.num_pages)
-    return render(request,'mainapp/products.html', {'provider': product_provider, 'men': category, 'stuff':stuff, 'basket':get_basket(request.user)})
+    return render(request,'mainapp/products.html', {'provider': product_provider, 'men': category, 'stuff':stuff})
 
 def contact(request):
-    return render(request,'mainapp/contact.html', {'links': links_menu,'basket':get_basket(request.user),'men': category})
+    return render(request,'mainapp/contact.html', {'links': links_menu,'men': category})
 
 def product(request:HttpRequest,id=None):
     category = Category.objects.all()
     if not id:
-        return render (request, 'mainapp/product.html', {'links': links_menu, 'men': category,'basket':get_basket(request.user)})
+        return render (request, 'mainapp/product.html', {'links': links_menu, 'men': category,})
     else:
         product = Stuff.objects.get(id=id)
         same = Stuff.objects.exclude(pk=id).filter(category=product.category)
-        return render(request, 'mainapp/product.html', {'links': links_menu, 'men': category,'product':product,'same': same,'basket':get_basket(request.user)})
+        return render(request, 'mainapp/product.html', {'links': links_menu, 'men': category,'product':product,'same': same,})
 
 def category(request:HttpRequest,id=None):
     get_object_or_404(Category,pk=id)
     cat = Stuff.objects.filter(category=id)
-    return render(request, 'mainapp/cat.html', {'cat': cat, 'men': category,'basket':get_basket(request.user)})
+    return render(request, 'mainapp/cat.html', {'cat': cat, 'men': category,})
 
 
 
