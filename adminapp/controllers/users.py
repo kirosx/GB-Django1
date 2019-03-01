@@ -1,5 +1,5 @@
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, BaseFormView
 from authapp.models import CustomUser
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import user_passes_test
@@ -31,3 +31,4 @@ class UserUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         parent_context = super(UserUpdateView, self).get_context_data(**kwargs)
         return parent_context
+
