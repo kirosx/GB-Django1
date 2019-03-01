@@ -2,10 +2,13 @@
 {% block content %}
 <hr>
 <h1>{{title.name}}</h1>
-<h2>(<a href="{% url 'adminapp:products_delete' title.product.id %}">DELETE</a>)</h2>
+    {% if title.id %}
+<h2>(<a href="{% url 'adminapp:products_delete' title.id %}">DELETE</a>)</h2>
+
 <h1>edit product</h1>
 
 <form action="{% url 'adminapp:products_update' title.id %}" method="post">
+   {% endif %}
     {% csrf_token %}
     {{form.as_p}}
     <p>

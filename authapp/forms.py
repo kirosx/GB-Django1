@@ -49,5 +49,5 @@ class UpdateForm(UserChangeForm):
             field.widget.attrs['class'] = 'form-control'
             field.help_text = ''
 
-            if field_name == 'password':
+            if field_name in ('password','is_staff','is_superuser'):
                 field.widget = forms.HiddenInput()

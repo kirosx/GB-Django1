@@ -71,7 +71,7 @@ def verify(request:HttpRequest,email,activation_key):
     try:
         user = CustomUser.objects.get(email=email)
         if user.activation_key == activation_key and not user.is_activation_key_expired():
-            user.is_active == True
+            user.is_active = True
             user.save()
             auth.login(request,user)
             return render(request,'authapp/verify.html')

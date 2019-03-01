@@ -8,5 +8,6 @@
         <a href="{% url 'adminapp:products_read' i.id %}">{{i.name}}</a>
     </li>
     {% endfor %}
+    <a href="{% url 'adminapp:products_create' %}">CREATE</a>
 </ul>
 {% endblock %}

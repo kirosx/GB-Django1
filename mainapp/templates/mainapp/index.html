@@ -27,9 +27,9 @@
                 <a class="button" href="{%url 'products:index' %}">Order Us <img src="{% static 'img/arrow.svg' %}" alt=""></a>
             </div>
             <div class="pagination">
-                <a href="product" class="circle"></a>
-                <a href="product" class="circle circle-active"></a>
-                <a href="product" class="circle"></a>
+                <a href="{% url 'products:index' %}" class="circle"></a>
+                <a href="{% url 'products:index' %}" class="circle circle-active"></a>
+                <a href="{% url 'products:index' %}" class="circle"></a>
             </div>
         </div>
         <div class="explore-block">
@@ -50,7 +50,7 @@
                         </a>
                         <h3 class="opacblocktitle">{{product.name}}</h3>
                         <p>{{product.description}}</p>
-                    </div><a href="product" class="im1"><img src="/media/{{product.img}}" alt="" class="im1s"></a>
+                    </div><a href="{% url 'products:index' %}" class="im1"><img src="/media/{{product.img}}" alt="" class="im1s"></a>
                 </div>
                 {% endfor %}
             </div>
@@ -117,7 +117,7 @@
             <div class="btm-2">
                 <div class="product1">
                     <div class="opacityblock">
-                        <a href="product">
+                        <a href="{% url 'products:index' %}">
                             <div class="next-circle"><img src="{% static 'img/arrow.svg' %}" class="arrow" alt="">
                             </div>
                         </a>
@@ -127,7 +127,7 @@
                 </div>
                 <div class="product1">
                     <div class="opacityblock">
-                        <a href="product">
+                        <a href="{% url 'products:index' %}">
                             <div class="next-circle"><img src="{% static 'img/arrow.svg' %}" class="arrow" alt="">
                             </div>
                         </a>
@@ -137,7 +137,7 @@
                 </div>
                 <div class="product1">
                     <div class="opacityblock">
-                        <a href="product">
+                        <a href="{% url 'products:index' %}">
                             <div class="next-circle"><img src="{% static 'img/arrow.svg' %}" class="arrow" alt="">
                             </div>
                         </a>
@@ -147,7 +147,7 @@
                 </div>
                 <div class="product1">
                     <div class="opacityblock">
-                        <a href="product">
+                        <a href="{% url 'products:index' %}">
                             <div class="next-circle"><img src="{% static 'img/arrow.svg' %}" class="arrow" alt="">
                             </div>
                         </a>
