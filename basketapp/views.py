@@ -20,7 +20,6 @@ def add(request: HttpRequest, id : int):
             'quantity':Basket.objects.get(product__id=id).quantity,
         })
 
-
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 

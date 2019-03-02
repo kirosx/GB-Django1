@@ -7,6 +7,8 @@ from django.urls import reverse
 from authapp.models import CustomUser
 from django.core.mail import send_mail
 from geekshop import settings
+from django.db import transaction
+from authapp.forms import CustomUserProfileEditForm
 
 
 def login(request:HttpRequest):
@@ -50,19 +52,22 @@ def register(request:HttpRequest):
     }
     return render(request, 'authapp/register.html', content)
 
-
+@transaction.atomic
 def edit(request:HttpRequest):
     title ='Edit'
     if request.method == 'POST':
-        update_form = UpdateForm(request.POST, instance=request.user)
-        if update_form.is_valid():
+        update_form = UpdateForm(request.POST,request.FILES, instance=request.user)
+        profile_form = CustomUserProfileEditForm(request.POST,instance=request.user.customuserprofile)
+        if update_form.is_valid() and profile_form.is_valid() :
             update_form.save()
             return HttpResponseRedirect(reverse('auth:edit'))
     else:
         update_form = UpdateForm(instance=request.user)
+        profile_form = CustomUserProfileEditForm(instance=request.user.customuserprofile)
     content = {
         'title': title,
         'update_form': update_form,
+        'profile_form':profile_form
     }
     return render(request, 'authapp/edit.html', content)
 
@@ -73,7 +78,7 @@ def verify(request:HttpRequest,email,activation_key):
         if user.activation_key == activation_key and not user.is_activation_key_expired():
             user.is_active = True
             user.save()
-            auth.login(request,user)
+            auth.login(request,user, backend='django.contrib.auth.backends.ModelBackend')
             return render(request,'authapp/verify.html')
         else:
             print(f'ERROR {user}')
