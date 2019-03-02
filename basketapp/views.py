@@ -25,13 +25,20 @@ def add(request: HttpRequest, id : int):
 
 
 def remove(request: HttpRequest, id: int):
-    item = Basket.objects.filter(product__id=id)
-    item[0].quantity -= 1
-    item[0].save()
+    item = Basket.objects.get(product__id=id)
+    item.quantity -= 1
+    item.save()
+
+    if request.is_ajax():
+        return JsonResponse({
+            'quantity':Basket.objects.get(product__id=id).quantity,
+        })
 
     return HttpResponseRedirect (request.META['HTTP_REFERER'])
+
 
 def index(request:HttpRequest):
     products = Basket.objects.filter(user=request.user)
     context = {'products': products, 'total': products[0].total_price if products else ''}
     return render(request, 'basketapp/index.html', context)
+

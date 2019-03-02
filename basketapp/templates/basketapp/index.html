@@ -11,7 +11,6 @@
         <b>Price {{item.product.price}} total - {{item.product_price}}</b>
         <b>Qty <span class="basketquantity">{{item.quantity}}</span></b><button class="addstuff" data-id="{{item.product_id}}">Add</button>
         <button class="delstuff" data-id="{{item.product_id}}">Remove</button>
-        <a href="{% url 'basket:remove' id=item.product_id%}">Delete</a>
     </li>
     {%endfor%}
 {{total}}
