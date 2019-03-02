@@ -20,7 +20,7 @@ menu-link-active
     </li>
     <li class="menu-list">
         <a href="{% url 'auth:edit' %}" class="menu-link">
-            Edit ({{user.username}})
+            Edit ({{user.first_name}})
         </a>
     </li>
     <li class="menu-list"><a href="{%url 'basket:index'%}" class="menu-link"><i class="fas fa-shopping-bag"></i>{{basket.0.total_qty}}</li></a>

@@ -5,7 +5,7 @@ from datetime import timedelta
 
 
 class CustomUser(AbstractUser):
-    age = models.PositiveIntegerField(verbose_name='возраст')
+    age = models.PositiveIntegerField(verbose_name='возраст', default=18)
     ava = models.ImageField(upload_to='avatars', verbose_name='аватар',)
     email = models.EmailField(verbose_name='email', blank='True')
 

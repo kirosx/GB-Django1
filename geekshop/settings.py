@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'mainapp',
     'authapp',
     'basketapp',
-    'adminapp'
+    'adminapp',
+    'social_django'
 ]
 
 MIDDLEWARE = [
@@ -132,6 +133,10 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.vk.VKOAuth2'
+)
 AUTH_USER_MODEL = 'authapp.CustomUser'
 AUTH_PASSWORD_VALIDATORS = [
     dict(NAME='django.contrib.auth.password_validation.MinimumLengthValidator', OPTIONS={'min_length': 3})
@@ -148,3 +153,7 @@ EMAIL_USE_SSL = False
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'tmp/email-messages/'
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_VK_OAUTH2_KEY = '6883409'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'ssfIwv9c3vxTFV4b98PJ'
