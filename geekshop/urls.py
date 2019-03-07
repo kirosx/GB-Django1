@@ -31,7 +31,7 @@ urlpatterns = [
     path('test/', controller.test),
     path('admin/', admin.site.urls),
     path('', include('social_django.urls', namespace='social')),
-    path('orders/', include('ordersapp.urls', namespace='orders')),
+    path('orders/', include('ordersapp.urls', namespace='ordersapp')),
 ]
 
 if settings.DEBUG:
