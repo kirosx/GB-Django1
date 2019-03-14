@@ -9,4 +9,5 @@
 </form>
 
 <a href="{% url 'auth:register' %}"> Register</a>
+<a href="{% url 'social:begin' 'vk-oauth2' %}?next=/"> Vk+ sign in</a>
 {% endblock %}

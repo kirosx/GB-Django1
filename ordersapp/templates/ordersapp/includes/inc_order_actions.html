@@ -1,0 +1,5 @@
+{% if object.status == 'FM' %}
+<button><a href="{% url 'ordersapp:order_forming_complete' object.pk %}">Buy Now</a></button>
+<button><a href="{% url 'ordersapp:order_delete' object.pk %}">Delete</a></button>{% endif %}
+<button><a href="{% url 'ordersapp:order_list' %}">Order-List</a></button>
+<button><a href="{% url 'home' %}"></a></button>

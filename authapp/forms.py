@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from authapp.models import CustomUser
+from authapp.models import CustomUser, CustomUserProfile
 import random, hashlib
 
 class LoginForm(AuthenticationForm):
@@ -51,3 +51,14 @@ class UpdateForm(UserChangeForm):
 
             if field_name in ('password','is_staff','is_superuser'):
                 field.widget = forms.HiddenInput()
+
+
+class CustomUserProfileEditForm(forms.ModelForm):
+    class Meta:
+        model= CustomUserProfile
+        fields = ('tagline','about_me','gender')
+
+    def __init__(self, *args, **kwargs):
+        super(CustomUserProfileEditForm,self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class']='form-control'

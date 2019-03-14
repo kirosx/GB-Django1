@@ -1,0 +1,9 @@
+{% if object %}
+Order # {{ object.pk }} from {{ object.created }}
+Customer: {{ user.last_name}} {{user.first_name }}
+Updated: {{ object.updated }}
+status: {{ object.get_status_display }}
+<hr>
+Total quantity: {{ object.get_total_quantity }}
+Total cost: {{ object.get_total_cost }}
+{% endif%}

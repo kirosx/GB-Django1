@@ -19,9 +19,15 @@ menu-link-active
         </a>
     </li>
     <li class="menu-list">
+    <div class="usermenu">
         <a href="{% url 'auth:edit' %}" class="menu-link">
-            Edit ({{user.username}})
+            {{user.first_name}}
         </a>
+        <ul class="usermenumenu">
+            <li><a href="{% url 'auth:edit' %}" class="menu-link">Edit</a></li>
+            <li><a href="{% url 'ordersapp:order_list' %}" class="menu-link">Orders</a></li>
+        </ul>
+        </div>
     </li>
     <li class="menu-list"><a href="{%url 'basket:index'%}" class="menu-link"><i class="fas fa-shopping-bag"></i>{{basket.0.total_qty}}</li></a>
         {% if user.is_superuser %}

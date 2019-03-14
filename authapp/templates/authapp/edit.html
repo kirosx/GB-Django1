@@ -3,6 +3,7 @@
 <form action="{% url 'auth:edit' %}" method="post">
     {% csrf_token %}
     {{update_form.as_p}}
+    {{ profile_form.as_p }}
     <p>
         <input type="submit" value="Edit">
     </p>
