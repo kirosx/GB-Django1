@@ -16,7 +16,8 @@ class OrderList(ListView):
     model = Order
 
     def get_queryset(self):
-        return Order.objects.filter(user = self.request.user)
+        return Order.objects.filter(user=self.request.user)
+
 
 class OrderItemsCreate(CreateView):
     model = Order
@@ -38,7 +39,7 @@ class OrderItemsCreate(CreateView):
                     form.initial['product'] = basket_items[num].product
                     form.initial['quantity'] = basket_items[num].quantity
                     form.initial['price'] = basket_items[num].price
-                    basket_items[num].delete()
+                    # basket_items[num].delete()
                 basket_items.delete()
             else:
                 formset = OrderFormSet()
@@ -116,20 +117,20 @@ def order_forming_complete(request, id:int):
     return HttpResponseRedirect(reverse('ordersapp:order_list'))
 
 
-@receiver(pre_save, sender=OrderItem)
-@receiver(pre_save, sender=Basket)
-def product_quantity_update_save(sender, update_fields, instance, **kwargs):
-    if update_fields is 'quantity' or 'product':
-        if instance.pk:
-            instance.product.quantity-=instance.quantity - sender.get_item(instance.pk).quantity
-        else:
-            instance.product.quantity-=instance.quantity
-        instance.product.save()
-
-
-@receiver(pre_save, sender=OrderItem)
-@receiver(pre_save, sender=Basket)
-def product_quantity_update_delete(sender,instance,**kwargs):
-    instance.product.quantity+=instance.quantity
-    instance.product.save()
+#@receiver(pre_save, sender=OrderItem)
+#@receiver(pre_save, sender=Basket)
+#def product_quantity_update_save(sender, update_fields, instance, **kwargs):
+#    if update_fields is 'quantity' or 'product':
+#        if instance.pk:
+#            instance.product.quantity-=instance.quantity - sender.get_item(instance.pk).quantity
+#        else:
+#            instance.product.quantity-=instance.quantity
+#        instance.product.save()
+#
+#
+#@receiver(pre_save, sender=OrderItem)
+#@receiver(pre_save, sender=Basket)
+#def product_quantity_update_delete(sender,instance,**kwargs):
+#    instance.product.quantity+=instance.quantity
+#    instance.product.save()
 # Create your views here.

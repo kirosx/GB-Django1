@@ -4,14 +4,14 @@ from mainapp.models import Stuff
 from basketapp.models import Basket
 
 
-def add(request: HttpRequest, id : int):
+def add(request: HttpRequest, id: int):
     product = get_object_or_404(Stuff, pk=id)
-    exist_item = Basket.objects.filter(product__id=id)
+    exist_item = Basket.objects.filter(user=request.user, product=product).select_related()
     if exist_item:
         exist_item[0].quantity += 1
         exist_item[0].save()
     else:
-        new_item = Basket(user=request.user,product=product)
+        new_item = Basket(user=request.user, product=product)
         new_item.quantity = 1
         new_item.save()
 
