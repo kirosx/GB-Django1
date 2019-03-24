@@ -9,4 +9,5 @@ class Stuff(models.Model):
     img = models.ImageField(upload_to='stuff', verbose_name='logo')
     description = models.TextField(verbose_name='Description',blank=True)
     price = models.DecimalField(verbose_name='price',max_digits=10, decimal_places=2)
+    quantity = models.PositiveIntegerField(verbose_name='qty', default=120)
 # Create your models here.
