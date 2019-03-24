@@ -2,13 +2,14 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpRequest,HttpResponseRedirect, JsonResponse
 from mainapp.models import Stuff
 from basketapp.models import Basket
+from django.db.models import F
 
 
 def add(request: HttpRequest, id: int):
     product = get_object_or_404(Stuff, pk=id)
     exist_item = Basket.objects.filter(user=request.user, product=product).select_related()
     if exist_item:
-        exist_item[0].quantity += 1
+        exist_item[0].quantity = F('quantity') + 1
         exist_item[0].save()
     else:
         new_item = Basket(user=request.user, product=product)
