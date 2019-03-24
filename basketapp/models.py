@@ -1,6 +1,7 @@
 from django.db import models
 from mainapp.models import Stuff
 from django.conf import settings
+from django.utils.functional import cached_property
 
 
 class BasketQuerySet(models.QuerySet):
@@ -8,7 +9,7 @@ class BasketQuerySet(models.QuerySet):
         for object in self:
             object.product.quantity += object.quantity
             object.product.save()
-        super(BasketQuerySet, self).delete(*args,**kwargs)
+        super(BasketQuerySet, self).delete(*args, **kwargs)
 
 
 class Basket(models.Model):
@@ -27,17 +28,20 @@ class Basket(models.Model):
     def product_price(self):
         return self.product.price * self.quantity
 
+
+    @cached_property
+    def get_items_cached(self):
+        return self.user.basket.select_related()
+
     @property
     def total_qty(self):
-        items = Basket.objects.filter(user=self.user)
-        total = sum([x.quantity for x in items])
-        return total
+        items = self.get_items_cached
+        return sum([x.quantity for x in items])
 
     @property
     def total_price(self):
-        items = Basket.objects.filter(user=self.user)
-        total = sum([x.product_price for x in items])
-        return total
+        items = self.get_items_cached
+        return sum([x.product_price for x in items])
     
     @staticmethod
     def get_items(user):
