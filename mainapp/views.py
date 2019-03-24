@@ -3,9 +3,11 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpRequest
 import datetime
 from .models import Category, Stuff
+from django.core.cache import cache
 from basketapp.models import Basket
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 # Create your views here.
 links_menu = [
 {'href': 'home', 'name': 'Home'},
@@ -15,10 +17,33 @@ links_menu = [
 ]
 
 
+# def index(request):
+#     if settings.LOW_CACHE:
+#         key = 'main_menu'
+#         main_menu = cache.get(key)
+#         if not main_menu:
+#             main_menu = {'links': links_menu, 'intro': Stuff.objects.all()[:4], 'trending': Stuff.objects.all()[8:15]}
+#             cache.set(key, main_menu)
+#         return main_menu
+#     else:
+#         return {'links': links_menu, 'intro': Stuff.objects.all()[:4], 'trending': Stuff.objects.all()[8:15]}
+
+
 def index(request):
-    intro = Stuff.objects.all ()[:4]
-    trending = Stuff.objects.all ()[8:15]
-    return render(request,'mainapp/index.html', {'links': links_menu,'intro':intro, 'trending':trending})
+    # intro = Stuff.objects.all()[:4]
+    # trending = Stuff.objects.all()[8:15]
+    if settings.LOW_CACHE:
+        key = 'mmenu'
+        mmenu = cache.get(key)
+        if not mmenu:
+            mmenu = Stuff.objects.all()
+            cache.set(key, mmenu)
+            return render(request, 'mainapp/index.html',
+                          {'links': links_menu, 'intro': mmenu[:4], 'trending': mmenu[8:15]})
+        else:
+            return render(request, 'mainapp/index.html',
+                          {'links': links_menu, 'intro': mmenu[:4], 'trending': mmenu[8:15]})
+
 
 def products(request:HttpRequest, page=1):
     category = Category.objects.all()
