@@ -9,4 +9,3 @@ def db_profile_by_type(prefix, type, queries):
     print(f'db_profile {type} for {prefix}:')
     [print(query['sql']) for query in update_queries]
 
-    
