@@ -26,7 +26,7 @@ def add(request: HttpRequest, id: int):
 
 def remove(request: HttpRequest, id: int):
     item = Basket.objects.get(product__id=id)
-    item.quantity -= 1
+    item.quantity = F('quantity') - 1
     item.save()
 
     if request.is_ajax():

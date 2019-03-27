@@ -8,10 +8,11 @@
     {% if item.quantity %}
     <li>
         <p>{{item.product.name}}</p>
-        <img src="{{MEDIA_URL}}{{item.product.img}}" alt="">
-        <b>Price {{item.product.price}} total - {{item.product_price}}</b>
+        <img src="{{MEDIA_URL}}{{item.product.img}}" alt="" width="200px" height="200px">
+        <b>Price {{item.product.price}} total - {{item.product_price}}</b><br>
         <b>Qty <span class="basketquantity">{{item.quantity}}</span></b><button class="addstuff" data-id="{{item.product_id}}">Add</button>
         <button class="delstuff" data-id="{{item.product_id}}">Remove</button>
+        <hr>
     </li>
     {% endif %}
     {%endfor%}
