@@ -20,11 +20,9 @@
             <a class="logo" href="{% url 'home'%}"><img src="{% static 'img/logo.svg' %}" alt="logo"></a>
            {% include 'adminapp/menu.html' %}
         </div>
+        {% block content %}
+
+        {% endblock %}
     </div>
-
-{% block content %}
-
-{% endblock %}
-
 </body>
 </html>

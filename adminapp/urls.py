@@ -2,6 +2,7 @@ from django.urls import path
 from adminapp.views import users, products, categories
 from adminapp.controllers import users as ctr
 from adminapp.controllers.products import StuffUpdateView, StuffCreateView
+from django.views.decorators.cache import cache_page
 app_name = 'adminapp'
 
 urlpatterns = [
@@ -18,7 +19,7 @@ urlpatterns = [
     path('categories/read/<int:id>', categories.read,name='categories_read'),
     path('categories/update/<int:id>', categories.update,name='categories_update'),
     path('categories/delete/<int:id>', categories.delete,name='categories_delete'),
-    path('products/index', products.index, name='products'),
+    path('products/index', cache_page(360)(products.index), name='products'),
     path('products/create', StuffCreateView.as_view(), name='products_create'),
     path('products/read/<int:id>', products.read, name='products_read'),
     path('products/update/<int:pk>', StuffUpdateView.as_view(), name='products_update'),

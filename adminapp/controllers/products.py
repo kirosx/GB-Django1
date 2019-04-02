@@ -13,6 +13,12 @@ class StuffUpdateView(UpdateView):
         parent_context = super(StuffUpdateView, self).get_context_data(**kwargs)
         return parent_context
 
+    def form_valid(self, form):
+        if 'discount' in form.cleaned_data:
+            discount = form.cleaned_data['discount']
+            if discount:
+                self.object.product_set.update(price=F)
+
 
 
 class StuffCreateView(CreateView):
